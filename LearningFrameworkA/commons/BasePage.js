@@ -8,8 +8,8 @@ constructor(page)
 
 async click(locator)
 {
-
-    await this.page.locator(locator).click();
+    const element = this.page.locator(locator).first();
+    await element.click();
 }
 
 async fill(locator, text)
@@ -47,13 +47,18 @@ async HoverProduct(locator){
 
 
 async SelectDropdown(locator, value) {
-    await this.page.locator(locator).selectOption({label: value});
+    const dropdown = this.page.locator(locator);
+    await dropdown.selectOption({ label: value });
     
 }
 
 async getTextDropDown(locator) {
     return await this.page.locator(locator).textContent();
 
+}
+async getTextDropDownOptions(locator) {
+    const options = await this.page.locator(locator).allTextContents();
+    return options;
 }}
 
 module.exports = BasePage;

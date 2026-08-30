@@ -4,7 +4,15 @@ const EbayHomePageData = require('../test_data/EBayHomePagedata');
 const EBayHomePageUI = require("../Interfaces_Pages/specific/EbayHomepageUI");
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(EbayHomePageData.URL);
+    for (let attempt = 1; attempt <= 3; attempt++) {
+        await page.goto(EbayHomePageData.URL, { waitUntil: 'domcontentloaded' });
+
+        if (await page.locator(EBayHomePageUI.All_Categories).count() > 0) {
+            return;
+        }
+    }
+
+    throw new Error('eBay homepage did not load the category dropdown');
 });
 
 //test('Search product on eBay', async ({ page }) => {
@@ -40,8 +48,6 @@ test.only('Select a new category on eBay', async ({ page }) => {
     await ebayHomePage.SelectCategory(EbayHomePageData.CategoryData3);
     await ebayHomePage.ClickSearchButton();
     await ebayHomePage.ValidateSearchPageTitle();
-    await page.pause()
-    
 
 })
 

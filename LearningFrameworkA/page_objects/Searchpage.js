@@ -27,7 +27,16 @@ class Searchpage extends BasePage {
     }
 
     async clickValidateSearchPageTitle2() {
-        await this.click(SearchpageUI.Smartphones_SearchPagetitle);
+        await this.click(SearchpageUI.Smartphones_BrandCard);
+    }
+
+     async ValidateSearchPageTitle3(ExpectedTitle) {
+        const ActualTitle = await this.getText(SearchpageUI.Smartphones_BrandSearchPageProduct);
+        //await expect(ActualTitle).toBe(ExpectedTitle);
+    }
+
+    async clickValidateSearchPageTitle3() {
+        await this.click(SearchpageUI.Smartphones_BrandSearchPageProduct);
     }
 
 
