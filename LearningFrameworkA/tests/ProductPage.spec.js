@@ -39,6 +39,6 @@ test('Click the title on Cellphones Product Page on eBay', async ({ page }) => {
     await productpage.clickValidateProductPageTitle()
     await productpage.ValidateProductBuy();
     await productpage.clickProductBuy();
-    await page.pause();
+   // await page.pause();
 
 });
